@@ -1,0 +1,76 @@
+# final project
+# -------------
+
+Question 1:
+kubectl run nginx-pod --image=nginx:alpine
+
+Question 2:
+kubectl run messaging --image=redis:alpine -l "tier=msg"
+
+Question 3:
+kubectl create ns apx-x998-liran
+
+Question 4:
+kubectl get nodes -o json >> /tmp/liran
+
+Question 5:
+kubectl expose pod messaging --port=6379 --name messaging-service
+
+Question 6:
+6.yaml
+
+Question 7:
+kubectl create deploy hr-web-app --image kodekloud/webapp-color && kubectl scale deploy hr-web-app --replicas 2
+  
+Question 8:
+vi /etc/kubernetes/manifests/static-busybox.yaml
+file: 8.yaml
+for test: systemctl restart kubelet
+
+Question 9:
+kubectl create ns finance-liran
+kubectl run -n finance-liran temp-bus --image redis:alpine
+
+Question 10:
+kubectl apply -f 10.yaml
+file: 10.yaml
+
+Question 11:
+kubectl apply -f 11.yaml
+file: 11.yaml
+
+Question 12:
+kubectl apply -f pv-1.yaml
+kubectl apply -f 12.yaml
+file: 12.yaml
+
+Question 13:
+kubectl create deploy nginx-deploy --image nginx:1.16
+kubectl annotate deployment/nginx-deploy kubernetes.io/change-cause="install nginx 1.16"
+kubectl set image deployment/nginx-deploy nginx=nginx:1.17
+kubectl annotate deployment/nginx-deploy kubernetes.io/change-cause="update nginx 1.17"
+kubectl rollout history deployment
+
+Question 14:
+file: 14.yaml
+kubectl run --image nginx nginx-resolver --labels=app=nginx-resolver
+kubectl apply -f 14.yaml
+kubectl run --restart=Never --image busybox:1.28 dns -- sleep 1000
+kubectl exec -it dns -- nslookup $(kubectl get svc nginx-resolver-service -o=jsonpath='{.spec.clusterIP}') > /root/liran.svc
+kubectl exec -it dns -- nslookup $(kubectl get pods nginx-resolver -o=jsonpath='{.status.podIP}') > /root/liran.pod
+
+Question 15:
+file: 15.yaml
+kubectl apply -f 15.yaml
+kubectl delete pods
+
+Question 16:
+kubectl apply -f 16.yaml
+file: 16.yaml
+
+Pod Design Questions:
+1. kubectl get pods --show-labels
+2. kubectl run nginx --image=nginx -l "env=prod"
+	file: poddesign2.yaml
+	
+	

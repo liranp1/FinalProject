@@ -1,0 +1,33 @@
+PersistentVolume - create
+---------------------------
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pv-1
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Mi
+
+-----------------------------
+POD File
+--------
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: use-pv
+  name: use-pvspec-liran
+spec:
+  containers:
+  - image: nginx
+    name: liran-pv
+    volumeMounts:
+    - mountPath: "/data"
+      name: pv-1
+  volumes:
+    - name: pv-1
+      persistentVolumeClaim:
+        claimName: liran-pvc

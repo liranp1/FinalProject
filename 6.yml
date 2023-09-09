@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: "2023-09-06T15:17:39Z"
+  labels:
+    tier: msg
+  name: messaging-service
+  namespace: default
+  resourceVersion: "7814"
+  uid: 848abe0f-5855-4851-9c54-213bcf982397
+spec:
+  clusterIP: 100.67.169.141
+  clusterIPs:
+  - 100.67.169.141
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - port: 6379
+    protocol: TCP
+    targetPort: 6379
+  selector:
+    tier: msg
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
