@@ -69,8 +69,99 @@ kubectl apply -f 16.yaml
 file: 16.yaml
 
 Pod Design Questions:
+*********************
 1. kubectl get pods --show-labels
+
 2. kubectl run nginx --image=nginx -l "env=prod"
-	file: poddesign2.yaml
+	files: poddesign2.yaml, poddesign3.yaml
+
+3. kubectl get pods --selector=env --show-labels	
+ 
+4. kubectl get pods --selector=env=dev
+
+5. kubectl get pods --selector=env=dev --show-labels
+
+6. kubectl get pods --selector=env=prod
+
+7. kubectl get pods --selector=env=prod --show-labels
+
+8. kubectl get pods --selector=env
+
+9. kubectl get pods --selector=env --show-labels
+
+10. kubectl get pods -l 'env in (dev,prod)' --show-labels
+
+11. kubectl label pods nginx-rs-dev-7mnzc env=uat --overwrite
+    kubectl get pods --selector=env --show-labels
+	
+12. kubectl label pods -l env env-
+	kubectl get pods --show-labels
+	
+13. kubectl label pods --all app=nginx
+
+14. kubectl get nodes --show-labels
+
+15. kubectl label node worker nodeName=nginxnode
+
+16. file: 16-pod.yaml
+
+17. kubectl get pods -o wide
+ 
+18. kubectl get pods --show-labels
+
+Deployments:
+*************
+
+1. i. kubectl create deploy webapp --image=nginx --dry-run=client -o yaml > webapp.yaml
+   ii. file: webapp.yaml
+
+2. kubectl rollout status deployment.apps/webapp
+
+3. kubectl get rs
+
+4. kubectl get deploy webapp -o yaml > webappexport.yaml
+
+5. kubectl delete deploy webapp
+
+6. a. kubectl create deploy webapp --image=nginx:1.17.1 --dry-run=client -o yaml > webapp.yaml
+   b. file: 6-1.yaml
+	
+7. kubectl describe deployment webapp
+
+8. kubectl rollout history deploy
+
+9. kubectl rollout undo deployment webapp --to-revision 1
+   kubectl describe deployment webapp
+   
+10. a. kubectl deploy -f 1100.yaml
+		kubectl get pods 
+	b. kubectl rollout undo deployment webapp --to-revision 3
+	c. there is no revision 7, i rolled out to 3 and it's fine.
+	e. microk8s kubectl apply -f 10-latest.yaml
+	
+11. kubectl autoscale deployment webapp --cpu-percent=85 --min=10 --max=20
+
+13. kubectl delete all --all --force --grace-period=0
+
+14. kubectl create job hello-job --image=busybox --dry-run=client -o yaml -- echo "Hello I am from job" > hello-job.yaml
+    a. file: hello-job.yaml
 	
 	
+Config MAP:
+*************
+1. cat >> config.txt << EOF
+		key1=value1
+		key2=value2
+		EOF
+		cat config.txt
+2. cat config.txt
+
+3. kubectl run nginx --image=nginx --restart=Never --dry-run=client -o yaml > nginx-pod.yml
+   
+
+
+
+
+
+
+
